@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eingabeformular</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="move">
+          <h1>Testformular</h1>
+    <form id="personalData">
+        <label for="fname" class="size2">First Name</label>
+        <input type="text" id="fname" class="size" name="fname" required />
+
+        <p>
+            <label for="lname" class="size2">Last Name</label>
+            <input type="text" id="lname" class="size" name="lname" required />
+        </p>
+
+        <p>
+            <label for="email" class="size2">E-Mail</label>
+            <input type="email" id="email" class="size" name="email" required />
+        </p>
+        <p>
+            <label for="tele" class="size2">Phone Num</label>
+            <input type="tel" id="tele" class="size" name="tele" required />
+        </p>
+        <p>
+            <label for="color" class="size2">Favorite Colour</label>
+            <input type="color" id="color" class="size" name="color" required>
+        </p>
+
+        <p>
+            <input type="submit" class="ButtonI"  id="submitButton" required />
+        </p>
+
+    </form>
+    <p>
+        <button id="cls" class="ButtonI" onclick="localStorage.clear()">Einträge löschen</button>
+         <button class="ButtonI" onclick="window.location.href='einträge.html'">Zu den Einträgen</button>
+    </p>
+
+    </div>
+  
+   
+
+
+
+
+    <script>
+        const Formular = document.getElementById("personalData")
+        Formular.addEventListener("submit", submitClick);
+        let formulare = localStorage.length;
+
+        function submitClick(event) {
+            if (!event.target.checkValidity()) {
+                //es funktioniert.Warum?Keine Ahnung.
+            }
+
+
+            // verhindert standartverhalten von einem event
+            //neu laden
+            event.preventDefault();
+            //formulardaten auslesen,formdata
+
+            console.log("submit button clicked");
+            console.log(event);
+
+            const formElem = document.getElementById("personalData");
+            const formularData = new FormData(formElem);
+            const Formular = {}
+
+
+            for (const entry of formularData.entries()) {
+
+
+                console.log(entry[1]);
+
+
+                //dem Objekt Formular wird ein Wert zugewiesen.
+                // Der Formularname befindet sich im enry[0]
+                // Wird mit Formular[key]zugeordnet
+                // Mit dem key wird der Feldname (email fname lname) zugeordnet
+                // befindet sich in entry[1]
+
+                Formular[entry[0]] = entry[1]
+
+            }
+
+
+
+
+            localStorage.setItem("Formular" + formulare, JSON.stringify(Formular))
+            
+            formulare++
+        }
+        function clsClick(){
+            formulare = 0
+        }
+
+    
+        const clsButton = document.getElementById("cls")
+        clsButton.addEventListener("click", clsClick);
+    </script>
+
+</body>
+
+</html>
