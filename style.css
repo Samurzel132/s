@@ -118,6 +118,8 @@ h1 {
     background-color: rgb(255, 216, 165);
     font-family: monospace;
     padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.268) 10px 10px 20px  ;
+
 }
 
 #color {
@@ -160,3 +162,4 @@ h1 {
         background-position: 100%;
     }
 }
+
